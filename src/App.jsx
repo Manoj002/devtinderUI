@@ -1,10 +1,19 @@
 import React from "react"
+import Navbar from "./components/Navbar"
+import { Route, Routes } from "react-router-dom"
+import Body from "./components/Body"
 
 function App() {
   return (
-    <h1 class="text-3xl font-bold underline bg-blend-color-burn">
-      Hello world!
-    </h1>
+    <Routes>
+      <Route path="/" element={<Body />}>
+        <Route path="/login" element={<>Login</>} />
+      </Route>
+
+      <Route path="/user" element={<Body />}>
+        <Route path="/user/profile" element={<>Profile</>} />
+      </Route>
+    </Routes>
   )
 }
 
