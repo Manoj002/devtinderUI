@@ -1,16 +1,33 @@
-import React from 'react';
-import Navbar from './Navbar';
-import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
+import React, { useEffect } from "react";
+import Navbar from "./Navbar";
+import { Outlet, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { initGetProfile } from "../slices/profileSlice";
 
 const Body = () => {
-    return (
-        <>
-            <Navbar />
-            <Outlet />
-            <Footer />
-        </>
-    )
-}
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user.userDetails);
+  const isError = useSelector((store) => store.profile.isGetProfileError);
+  const navigate = useNavigate();
 
-export default Body
+  useEffect(() => {
+    if (user && Object.keys(user).length) {
+      navigate("/feed");
+    } else dispatch(initGetProfile());
+  }, []);
+
+  useEffect(() => {
+    if (isError) navigate("/login");
+  }, [isError]);
+
+  return (
+    <div className="flex flex-col">
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </div>
+  );
+};
+
+export default Body;
