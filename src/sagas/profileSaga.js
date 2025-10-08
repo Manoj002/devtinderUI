@@ -1,9 +1,14 @@
 import { call, put } from "redux-saga/effects";
-import { getUserProfile } from "../apiMiddleware/apiService";
-import { getProfileError, getProfileSuccess } from "../slices/profileSlice";
+import { getUserProfile, updateProfile } from "../apiMiddleware/apiService";
+import {
+  editProfileError,
+  editProfileSuccess,
+  getProfileError,
+  getProfileSuccess,
+} from "../slices/profileSlice";
 import { loginUserSuccess } from "../slices/userSlice";
 
-function* profileSaga() {
+export function* profileSaga() {
   try {
     const response = yield call(getUserProfile);
     yield put(getProfileSuccess(response));
@@ -13,4 +18,12 @@ function* profileSaga() {
   }
 }
 
-export default profileSaga;
+export function* editProfileSaga({ payload }) {
+  try {
+    const response = yield call(updateProfile, payload);
+    yield put(editProfileSuccess());
+    yield put(loginUserSuccess(response.data));
+  } catch (err) {
+    yield put(editProfileError());
+  }
+}

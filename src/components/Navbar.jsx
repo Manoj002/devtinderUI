@@ -23,9 +23,9 @@ const Navbar = () => {
       </div>
       {user && (
         <div className="flex flex-row justify-center items-center">
-          <span className="font-semibold mr-2">Welcome {user?.firstName}</span>
+          <span className="font-semibold mr-2">Welcome, {user?.firstName}</span>
           <div className="flex gap-2">
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end z-10">
               <div
                 tabIndex={0}
                 role="button"

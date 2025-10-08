@@ -26,7 +26,7 @@ export const getUserProfile = async () => {
 
 export const logUserOut = async () => {
   try {
-    const response = await axiosInstance.post(BASE_URL + "/logout");
+    const response = await axiosInstance.post(BASE_URL + "/logout", {});
     return response.data;
   } catch (err) {
     throw new Error("logUserOut error: " + err.message);
@@ -39,5 +39,18 @@ export const getUserFeed = async () => {
     return response.data;
   } catch (err) {
     throw new Error("getUserFeed error: " + err.message);
+  }
+};
+
+export const updateProfile = async (updateParams) => {
+  console.log(updateParams);
+  try {
+    const response = await axiosInstance.patch(
+      BASE_URL + "/profile/edit",
+      updateParams
+    );
+    return response.data;
+  } catch (err) {
+    throw new Error("updateProfile error: " + err.message);
   }
 };

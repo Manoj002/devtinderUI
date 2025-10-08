@@ -32,7 +32,7 @@
 - Logout feature
 - Integrate feed api and display users on feed page
 - Edit profile feature
-- show toast on profile edit
+<!-- - show toast on profile edit ------------------PROGRESS------------------ -->
 - see all connections
 - See all my connection requests
 - Feature: Accept/Reject connection req
