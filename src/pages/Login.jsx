@@ -65,7 +65,11 @@ const Login = () => {
           />
 
           <button className="btn btn-neutral mt-12" onClick={handleLogin}>
-            Login
+            {isLoading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              "LOGIN"
+            )}
           </button>
 
           <span className="flex justify-end mt-2">

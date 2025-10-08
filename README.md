@@ -29,6 +29,17 @@
 
 - Prevent post login route access, before login
 - If token is not present redirect user to login page
+- Logout feature
+- Integrate feed api and display users on feed page
+- Edit profile feature
+- show toast on profile edit
+- see all connections
+- See all my connection requests
+- Feature: Accept/Reject connection req
+
+- Send / Ignore connection req from feed
+- Signup new user
+- E2E testing
 
 ## Components folders design structure
 

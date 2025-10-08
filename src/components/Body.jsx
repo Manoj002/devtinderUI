@@ -18,7 +18,7 @@ const Body = () => {
   }, []);
 
   useEffect(() => {
-    if (isError) navigate("/login");
+    if (isError) navigate("/login"); // TODO: update the if condition for error.statusCode === 401 then logout
   }, [isError]);
 
   return (

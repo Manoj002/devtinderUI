@@ -9,11 +9,10 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => dispatch(logoutUser());
-
-  useEffect(() => {
-    if (!user) navigate("/login");
-  }, [user]);
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/login");
+  };
 
   return (
     <div className="navbar bg-base-300 h-[10vh] shadow-sm fixed top-0">
@@ -33,7 +32,7 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar mr-8"
               >
                 <div className="w-10 rounded-full">
-                  <img alt="Tailwind CSS Navbar component" src={user.photo} />
+                  <img alt="user-fallback-img" src={user.photo} />
                 </div>
               </div>
               <ul
