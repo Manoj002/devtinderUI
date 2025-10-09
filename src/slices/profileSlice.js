@@ -4,6 +4,7 @@ const initialState = {
   isGetProfileLoading: false,
   isUpdateProfileLoading: false,
   isUpdateProfileError: false,
+  isUpdateProfileSuccess: false,
   isGetProfileError: false,
   userProfileDetails: null,
 };
@@ -30,13 +31,16 @@ const profileSlice = createSlice({
     editProfile: (state, action) => {
       state.isUpdateProfileLoading = true;
       state.isUpdateProfileError = false;
+      state.isUpdateProfileSuccess = false;
     },
     editProfileSuccess: (state) => {
       state.isUpdateProfileLoading = false;
+      state.isUpdateProfileSuccess = true;
       state.isUpdateProfileError = false;
     },
     editProfileError: (state, action) => {
       state.isUpdateProfileLoading = false;
+      state.isUpdateProfileSuccess = false;
       state.isUpdateProfileError = true;
     },
   },

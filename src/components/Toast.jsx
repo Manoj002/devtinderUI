@@ -1,10 +1,10 @@
 import React from "react";
 
-const Toast = () => {
+const Toast = ({ toastMessage, toastVariant }) => {
   return (
-    <div className="toast toast-end">
-      <div className="alert alert-success">
-        <span>Message sent successfully.</span>
+    <div className="toast toast-end fixed bottom-[10vh]">
+      <div className={`alert ${toastVariant}`}>
+        <span>{toastMessage}</span>
       </div>
     </div>
   );

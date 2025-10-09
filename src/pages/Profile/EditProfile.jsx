@@ -13,8 +13,8 @@ const EditProfile = ({ user }) => {
   const [showToast, setShowToast] = useState(false);
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
-  const isUpdateProfileLoading = useSelector(
-    (store) => store.profile.isUpdateProfileLoading
+  const { isUpdateProfileSuccess, isUpdateProfileLoading } = useSelector(
+    (store) => store.profile
   );
   const userDetails = useSelector((store) => store.user.userDetails);
 
@@ -35,8 +35,7 @@ const EditProfile = ({ user }) => {
   };
 
   useEffect(() => {
-    alert("in");
-    if (!isUpdateProfileLoading) {
+    if (isUpdateProfileSuccess) {
       setShowToast(true);
     }
     setTimeout(() => {
@@ -121,7 +120,12 @@ const EditProfile = ({ user }) => {
           </button>
         </div>
       </div>
-      {showToast && <Toast />}
+      {showToast && (
+        <Toast
+          toastMessage="Profile updated successfully"
+          toastVariant="alert-success"
+        />
+      )}
     </div>
   );
 };
