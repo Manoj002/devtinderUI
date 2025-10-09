@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProfile } from "../../slices/profileSlice";
-import Toast from "../../components/Toast";
-import { genderOptions } from "../../constants/apiConstants";
+import { genderOptions } from "../constants/apiConstants";
+import { initRegisterUser } from "../slices/registerUserSlice";
+import { useNavigate } from "react-router-dom";
 
-const EditProfile = ({ user }) => {
+const Register = () => {
   const [showToast, setShowToast] = useState(false);
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
-  const { isUpdateProfileSuccess, isUpdateProfileLoading } = useSelector(
-    (store) => store.profile
+  const navigate = useNavigate();
+  const { isRegisterUserLoading, isRegisterUserSuccess } = useSelector(
+    (store) => store.registerUser
   );
-  const userDetails = useSelector((store) => store.user.userDetails);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -25,31 +25,32 @@ const EditProfile = ({ user }) => {
     });
   };
 
-  const handleProfileUpdate = () => {
-    dispatch(editProfile(userData));
+  const handleSignUp = () => {
+    dispatch(initRegisterUser(userData));
   };
 
   useEffect(() => {
-    if (isUpdateProfileSuccess) {
+    if (isRegisterUserSuccess) {
       setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+      navigate("/login");
     }
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  }, [userDetails]);
+  }, [isRegisterUserSuccess]);
 
   return (
-    <div className="flex w-[100%] justify-center items-center ">
+    <div className="flex justify-center items-center flex-row h-[80vh] mt-[10vh]">
       <div className="card bg-base-200 shadow-sm w-[60%]">
         <div className="shadow-md p-4">
-          <h2 className="card-title">{user?.firstName + "'s profile"}</h2>
+          <h2 className="card-title">Register</h2>
         </div>
         <div className="card-body justify-center items-center">
           <input
             type="text"
             placeholder="Enter first name"
             className="input"
-            value={userData?.firstName ?? user?.firstName}
+            value={userData?.firstName}
             name="firstName"
             onChange={handleOnChange}
           />
@@ -57,8 +58,24 @@ const EditProfile = ({ user }) => {
             type="text"
             placeholder="Enter last name"
             className="input"
-            value={userData?.lastName ?? user?.lastName}
+            value={userData?.lastName}
             name="lastName"
+            onChange={handleOnChange}
+          />
+          <input
+            type="email"
+            placeholder="Enter email address"
+            className="input"
+            value={userData?.emailId}
+            name="emailId"
+            onChange={handleOnChange}
+          />
+          <input
+            type="password"
+            placeholder="Enter password"
+            className="input"
+            value={userData?.password}
+            name="password"
             onChange={handleOnChange}
           />
           <input
@@ -66,7 +83,7 @@ const EditProfile = ({ user }) => {
             className="input"
             placeholder="Gender"
             list="genders"
-            value={userData?.gender ?? user?.gender}
+            value={userData?.gender}
             name="gender"
             onBlur={handleOnChange}
           />
@@ -82,14 +99,14 @@ const EditProfile = ({ user }) => {
             min="18"
             title="Must be above 18"
             name="age"
-            value={userData?.age ?? user?.age}
+            value={userData?.age}
             onChange={handleOnChange}
           />
           <input
             type="url"
             className="input"
             placeholder="https://"
-            value={userData?.photo ?? user?.photo}
+            value={userData?.photo}
             name="photo"
             onChange={handleOnChange}
           />
@@ -97,7 +114,7 @@ const EditProfile = ({ user }) => {
             type="text"
             className="input"
             placeholder="About you..."
-            value={userData?.about ?? user?.about}
+            value={userData?.about}
             name="about"
             onChange={handleOnChange}
           />
@@ -105,19 +122,19 @@ const EditProfile = ({ user }) => {
         <div className="card-actions justify-around mb-4">
           <button
             className="btn btn-wide w-[100%] btn-outline btn-primary"
-            onClick={handleProfileUpdate}
+            onClick={handleSignUp}
           >
-            {isUpdateProfileLoading ? (
+            {isRegisterUserLoading ? (
               <span className="loading loading-spinner"></span>
             ) : (
-              "UPDATE PROFILE"
+              "SIGN UP"
             )}
           </button>
         </div>
       </div>
       {showToast && (
         <Toast
-          toastMessage="Profile updated successfully"
+          toastMessage="You are registered in dev tinder"
           toastVariant="alert-success"
         />
       )}
@@ -125,4 +142,4 @@ const EditProfile = ({ user }) => {
   );
 };
 
-export default EditProfile;
+export default Register;

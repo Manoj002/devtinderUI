@@ -7,10 +7,19 @@ const Feed = () => {
   const dispatch = useDispatch();
 
   const { feedData } = useSelector((store) => store.feed);
+  const { isConnectionRequestSuccess } = useSelector(
+    (store) => store.connectionRequest
+  );
 
   useEffect(() => {
     if (!feedData) dispatch(getFeed());
   }, []);
+
+  useEffect(() => {
+    if (isConnectionRequestSuccess) {
+      dispatch(getFeed());
+    }
+  }, [isConnectionRequestSuccess]);
 
   return (
     <div className="flex justify-center items-center h-[80vh] mt-[10vh]">

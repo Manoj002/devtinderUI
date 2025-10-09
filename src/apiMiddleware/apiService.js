@@ -43,7 +43,6 @@ export const getUserFeed = async () => {
 };
 
 export const updateProfile = async (updateParams) => {
-  console.log(updateParams);
   try {
     const response = await axiosInstance.patch(
       BASE_URL + "/profile/edit",
@@ -52,5 +51,25 @@ export const updateProfile = async (updateParams) => {
     return response.data;
   } catch (err) {
     throw new Error("updateProfile error: " + err.message);
+  }
+};
+
+export const sendRequest = async (params) => {
+  try {
+    const response = await axiosInstance.post(
+      BASE_URL + "/request/send" + "/" + params.status + "/" + params.toUserId
+    );
+    return response.data;
+  } catch (err) {
+    throw new Error("sendRequest error: " + err.message);
+  }
+};
+
+export const registerUser = async (params) => {
+  try {
+    const response = await axiosInstance.post(BASE_URL + "/signUp", params);
+    return response.data;
+  } catch (err) {
+    throw new Error("registerUser error: " + err.message);
   }
 };

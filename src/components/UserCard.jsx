@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { initConnectionRequest } from "../slices/connectionRequestSlice";
 
 const UserCard = ({ user }) => {
+  const dispatch = useDispatch();
+
+  const handleUserFeedSwipeAction = (status, toUserId) => {
+    dispatch(initConnectionRequest({ status, toUserId }));
+  };
+
   return (
     <div className="flex flex-col border-base-content card bg-base-300 border">
       <div className="flex flex-[1/2] h-[80%]">
@@ -36,7 +44,10 @@ const UserCard = ({ user }) => {
         )}
       </div>
       <div className="flex justify-around my-2">
-        <button className="btn btn-circle size-8">
+        <button
+          className="btn btn-circle size-8"
+          onClick={() => handleUserFeedSwipeAction("ignored", user._id)}
+        >
           <svg
             width="24"
             height="24"
@@ -52,7 +63,10 @@ const UserCard = ({ user }) => {
           </svg>
         </button>
 
-        <button className="btn btn-circle size-8">
+        <button
+          className="btn btn-circle size-8"
+          onClick={() => handleUserFeedSwipeAction("interested", user._id)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

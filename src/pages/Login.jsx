@@ -10,8 +10,8 @@ const Login = () => {
   const { userDetails, isLoading, isError, errorMessage } = useSelector(
     (store) => store.user
   );
-  const [emailId, setEmailId] = useState("Simran@gmail.com");
-  const [password, setPassword] = useState("SimranSingh@123");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleOnEmailChange = (e) => {
     setEmailId(e.target.value);
